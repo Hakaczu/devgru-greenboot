@@ -35,14 +35,11 @@ chown -R $USERNAME:$USERNAME $USER_HOME/.ssh
 
 echo "==> Aktualizacja i instalacja pakietów..."
 apk update && apk upgrade
-apk add bash vim neovim micro tmux curl git openssh coreutils iptables sudo make gnupg go unzip py3-pip tailscale \
+apk add bash vim neovim micro tmux curl git openssh coreutils iptables sudo make gnupg gopass unzip py3-pip tailscale \
         rsync rclone wget drill bind-tools htop mtr nmap nmap-ncat tcpdump socat iperf3 fzf jq yq cronie
 
 echo "==> Instalacja narzędzi CLI..."
 pip install --break-system-packages ansible
-export GOPATH=$HOME/go
-export PATH=$PATH:$GOPATH/bin
-su - $USERNAME -c "go install github.com/gopasspw/gopass@latest"
 
 echo "==> Instalacja Terraform..."
 TF_VERSION=$(curl -s https://releases.hashicorp.com/terraform/ | grep -Eo 'terraform/[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 | cut -d/ -f2)
