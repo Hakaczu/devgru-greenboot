@@ -93,12 +93,12 @@ case "$1" in
         echo "♻️  Przywracanie backupu FROGa..."
         LATEST_BACKUP=$(ls -t ~/backups/frog_backup_*.tar.gz 2>/dev/null | head -n 1)
 
-        if [ -z \"$LATEST_BACKUP\" ]; then
-            echo \"❌ Brak pliku backupu w ~/backups/\"
+        if [ -z "$LATEST_BACKUP" ]; then
+            echo "❌ Brak pliku backupu w ~/backups/"
         else
-            echo \"📦 Przywracam z $LATEST_BACKUP...\"
-            tar -xzf \"$LATEST_BACKUP\" -C ~
-            echo \"✅ Przywrócono dane z backupu.\"
+            echo "📦 Przywracam z $LATEST_BACKUP..."
+            tar -xzf "$LATEST_BACKUP" -C ~
+            echo "✅ Przywrócono dane z backupu."
         fi
         ;;
     info)

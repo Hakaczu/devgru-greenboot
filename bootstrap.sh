@@ -25,10 +25,16 @@ else
     adduser -D "$USERNAME"
     echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
 fi
+sed -i "s|^$USERNAME:.*:/bin/sh|$USERNAME:x:$(id -u $USERNAME):$(id -g $USERNAME)::/home/$USERNAME:/bin/bash|" /etc/passwd
 
 echo "==> Konfigurowanie SSH dla użytkownika $USERNAME..."
 mkdir -p $USER_HOME/.ssh
-cp ~/.ssh/authorized_keys $USER_HOME/.ssh/authorized_keys
+if [ -f ./authorized_keys ]; then
+    cp ./authorized_keys $USER_HOME/.ssh/authorized_keys
+else
+    echo "Brak pliku authorized_keys w katalogu roboczym. Upewnij się, że plik istnieje."
+    exit 1
+fi
 chmod 700 $USER_HOME/.ssh
 chmod 600 $USER_HOME/.ssh/authorized_keys
 chown -R $USERNAME:$USERNAME $USER_HOME/.ssh
