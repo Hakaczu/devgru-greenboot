@@ -67,6 +67,23 @@ case "$1" in
         echo "➡️  Sprawdzam status Tailscale..."
         tailscale status 2>/dev/null || echo "⚠️  tailscale nie działa"
 
+        echo "➡️  Sprawdzam strukturę katalogów..."
+        for dir in ~/bin ~/projects ~/config ~/logs ~/tmp ~/secrets ~/backups ~/cron ~/infra ~/cheatsheets; do
+            if [ -d "$dir" ]; then
+                echo "✅ $dir istnieje"
+            else
+                echo "❌ Brakuje katalogu: $dir"
+            fi
+        done
+
+        echo "➡️  Sprawdzam obecność backupów..."
+        LATEST_BACKUP=$(ls -t ~/backups/frog_backup_*.tar.gz 2>/dev/null | head -n 1)
+        if [ -z "$LATEST_BACKUP" ]; then
+            echo "⚠️  Brak backupów w ~/backups/"
+        else
+            echo "✅ Ostatni backup: $(date -r "$LATEST_BACKUP" "+%Y-%m-%d %H:%M")"
+        fi
+
         echo "➡️  Sprawdzam konfigurację gopass..."
         gopass status 2>/dev/null || echo "⚠️  brak stanu gopass"
 
