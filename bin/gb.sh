@@ -124,18 +124,22 @@ case "$1" in
     ports)
         echo "🌐 Dostępne zewnętrzne porty FROGa:"
         HOSTNAME=$(hostname)
+        IP=$(getent hosts "$HOSTNAME" | awk '{ print $1 }')
         SUFFIX=$(echo "$HOSTNAME" | grep -o '[0-9]*$')
 
         echo "Domena: $HOSTNAME"
         echo "Identyfikator: $SUFFIX"
         echo
         echo "➡️  Porty dostępne (TCP/UDP):"
-        echo " - $HOSTNAME:20678 → 192.168.6.178:20678 (slot 2)"
-        echo " - $HOSTNAME:30678 → 192.168.6.178:30678 (slot 3)"
-        echo " - $HOSTNAME:40678 → 192.168.6.178:40678 (slot 4)"
+        for PREFIX in 20 30 40; do
+            PORT="${PREFIX}${SUFFIX}"
+            SLOT=$((PREFIX / 10))
+            echo " - $HOSTNAME:$PORT → $IP:$PORT (slot $SLOT)"
+        done
         echo
         echo "🧪 Status nasłuchu lokalnie:"
-        for PORT in 20678 30678 40678; do
+        for PREFIX in 20 30 40; do
+            PORT="${PREFIX}${SUFFIX}"
             if ss -tuln | grep -q ":$PORT"; then
                 echo "✅ Port $PORT aktywny (nasłuchuje)"
             else
