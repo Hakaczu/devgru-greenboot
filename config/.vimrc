@@ -3,7 +3,6 @@
 " 🔹 Kolor i styl
 syntax on
 set background=dark
-colorscheme desert     " możesz zmienić na elflord, ron, torte itd.
 
 " 🔹 Widoczność i komfort
 set number             " numeracja linii
