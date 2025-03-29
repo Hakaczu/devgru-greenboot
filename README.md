@@ -19,7 +19,7 @@ Zaprojektowany z myślą o szybkości i pełnej gotowości DevOpsowej, greenboot
   - `.bashrc`, `.tmux.conf`, `nvim`, `micro`
   - aliasy, plugins, MOTD
 - Tworzy lokalny vault gopass
-- Ustawia cron, firewall, i przygotowuje katalogi
+- Ustawia cron i przygotowuje katalogi
 
 ---
 
