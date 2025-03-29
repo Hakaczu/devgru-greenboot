@@ -68,6 +68,12 @@ EOF
 
 chown -R $USERNAME:$USERNAME $USER_HOME
 
+# Kopiowanie cheatsheets
+if [ -d ./cheatsheets ]; then
+    cp -r ./cheatsheets/* $USER_HOME/cheatsheets/
+    chown -R $USERNAME:$USERNAME $USER_HOME/cheatsheets
+fi
+
 # Konfiguracje
 cp -r ./config/.bashrc $USER_HOME/
 cp -r ./config/.vimrc $USER_HOME/
@@ -83,7 +89,7 @@ chown $USERNAME:$USERNAME $USER_HOME/bin/gb
 # MOTD
 echo "neofetch" >> $USER_HOME/.bashrc
 cat <<EOF > /etc/motd
-🐸 Witaj na FROGu – Terminalowy Node DEVGRU
+🐸 Alpine Node DEVGRU
 Hostname: $(hostname)
 Data: $(date)
 Uptime: $(uptime -p)
