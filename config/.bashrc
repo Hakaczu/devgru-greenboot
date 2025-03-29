@@ -29,7 +29,7 @@ GRAY='\[\033[1;30m\]'
 
 # === Prompt ===
 # Format: [HH:MM] user@host:~/path (branch) $
-PS1="${GRAY}[\A]${RESET} ${CYAN}\u@\h${RESET}:${BLUE}\w${RESET} \$(parse_git_branch && echo \"(${YELLOW}\$(parse_git_branch)${RESET})\")\$ "
+PS1="${GRAY}[\A]${RESET} ${CYAN}\u${RESET}:${BLUE}\w${RESET} \$(parse_git_branch && echo \"(${YELLOW}\$(parse_git_branch)${RESET})\")\$ "
 
 # PATH
 export PATH="$HOME/bin:$HOME/.local/bin:$PATH"

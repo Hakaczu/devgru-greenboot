@@ -103,6 +103,7 @@ fi
 
 echo "==> Kopiowanie konfiguracji..."
 cp -r ./config/.bashrc $USER_HOME/
+cp -r ./config/.bash_profile $USER_HOME/
 cp -r ./config/.vimrc $USER_HOME/
 cp -r ./config/.tmux.conf $USER_HOME/
 cp ./config/micro/settings.json $USER_HOME/.config/micro/
