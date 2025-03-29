@@ -41,8 +41,13 @@ case "$1" in
         tail -n 50 /var/log/syslog
         ;;
     cheats)
-        echo "📚 Dostępne ściągi:"
-        ls ~/cheatsheets/
+        echo "📚 greenboot cheatsheets"
+        echo "──────────────────────────"
+        if [ -f ~/cheatsheets/README.md ]; then
+            cat ~/cheatsheets/README.md | less
+        else
+            echo "Brak pliku ~/cheatsheets/README.md"
+        fi
         ;;
     version)
         echo "greenboot CLI version $VERSION"
