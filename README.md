@@ -13,7 +13,7 @@ Zaprojektowany z myślą o szybkości, czystości i pełnej gotowości DevOpsowe
 - Generuje klucze GPG i SSH
 - Instaluje:
   - `neovim`, `micro`, `tmux`, `nnn`
-  - `ansible`, `terraform`, `gopass`, `tailscale`
+  - `ansible`, `opentofu`, `gopass`, `tailscale`
   - narzędzia sieciowe (`nmap`, `tcpdump`, `drill`, `mtr`, itd.)
 - Konfiguruje:
   - `.bashrc`, `.tmux.conf`, `nvim`, `micro`
@@ -46,7 +46,7 @@ sudo sh bootstrap.sh frog
 ├── secrets/       # Tokeny, klucze GPG
 ├── backups/       # Lokalne backupy
 ├── cron/          # Skrypty do crona
-├── infra/         # Ansible, Terraform, DNS
+├── infra/         # Ansible, OpenTofu, DNS
 ├── cheatsheets/   # Skróty do narzędzi
 └── README_DEVGRU.txt
 ```

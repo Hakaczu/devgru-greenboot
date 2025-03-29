@@ -41,11 +41,25 @@ apk add bash vim neovim micro tmux curl git openssh coreutils iptables sudo make
 echo "==> Instalacja narzędzi CLI..."
 pip install --break-system-packages ansible
 
-echo "==> Instalacja Terraform..."
-TF_VERSION=$(curl -s https://releases.hashicorp.com/terraform/ | grep -Eo 'terraform/[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 | cut -d/ -f2)
-curl -Ls "https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_linux_amd64.zip" -o /tmp/terraform.zip
-unzip /tmp/terraform.zip -d /usr/local/bin/
-chmod +x /usr/local/bin/terraform
+echo "==> Instalacja OpenTofu..."
+# Instalacja zależności wymaganych przez OpenTofu
+apk add --no-cache curl unzip libc6-compat
+
+# Pobieranie najnowszej wersji OpenTofu
+TF_VERSION=$(curl -s https://opentofu.org/releases/ | grep -Eo 'opentofu/[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 | cut -d/ -f2)
+curl -Ls "https://opentofu.org/releases/${TF_VERSION}/opentofu_${TF_VERSION}_linux_amd64.zip" -o /tmp/opentofu.zip
+
+# Rozpakowanie i instalacja binarki OpenTofu
+unzip /tmp/opentofu.zip -d /usr/local/bin/
+chmod +x /usr/local/bin/opentofu
+
+# Weryfikacja instalacji
+if ! command -v opentofu >/dev/null 2>&1; then
+    echo "\u274c Instalacja OpenTofu nie powiodła się."
+    exit 1
+else
+    echo "\u2705 OpenTofu zainstalowane pomyślnie."
+fi
 
 echo "==> Tworzenie struktury katalogów w $USER_HOME..."
 mkdir -p $USER_HOME/{bin,projects,config,logs,tmp,secrets,backups,cron,infra,cheatsheets}
@@ -64,7 +78,7 @@ cat <<EOF > $USER_HOME/README_DEVGRU.txt
 ~/secrets/     – Klucze, tokeny
 ~/backups/     – Backupy lokalne Froga
 ~/cron/        – Automatyczne zadania
-~/infra/       – Terraform / Ansible / DNS
+~/infra/       – OpenTofu / Ansible / DNS
 ~/cheatsheets/ – Ściągi do narzędzi terminalowych
 EOF
 

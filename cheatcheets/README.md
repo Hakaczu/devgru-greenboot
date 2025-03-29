@@ -76,13 +76,13 @@ tracepath devgru.com.pl
 
 ---
 
-## 🌍 terraform
-terraform init  
-terraform plan  
-terraform apply  
-terraform destroy  
-terraform fmt  
-terraform validate  
+## 🌍 opentofu
+opentofu init  
+opentofu plan  
+opentofu apply  
+opentofu destroy  
+opentofu fmt  
+opentofu validate  
 
 ---
 

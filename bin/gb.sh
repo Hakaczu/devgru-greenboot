@@ -56,7 +56,7 @@ case "$1" in
         echo "🧪 Diagnostyka środowiska FROGa:"
         echo "➡️  Sprawdzam dostępność narzędzi..."
 
-        for bin in terraform gopass ansible-playbook ssh nvim micro tmux nnn gb; do
+        for bin in opentofu gopass ansible-playbook ssh nvim micro tmux nnn gb; do
             if command -v $bin >/dev/null 2>&1; then
                 echo "✅ $bin OK"
             else
