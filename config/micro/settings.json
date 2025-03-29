@@ -1,15 +1,35 @@
 {
+    "autoindent": true,
     "autosave": true,
-    "colorscheme": "solarized-dark",
+    "background": "dark",
+    "clipboard": "external",
+    "colorscheme": "solarized",          // możesz zmienić np. na "twilight", "monokai", "nord"
+    "cursorline": true,
+    "diffgutter": true,
     "fileformat": "unix",
+    "filetype": "detect",
+    "highlightcolor": "blue",
     "ignorecase": true,
     "indentchar": " ",
-    "tabsize": 4,
+    "indentwidth": 4,
+    "insertfinalnewline": true,
+    "mouse": true,
+    "pluginchannels": [
+        "https://github.com/micro-editor/plugin-channel"
+    ],
     "ruler": true,
     "savecursor": true,
+    "scrollbar": true,
     "scrollmargin": 2,
-    "statusline": true,
+    "smartcase": true,
+    "softwrap": true,
+    "splitbottom": true,
+    "splitright": true,
+    "statusline": "micro | devgru 🛠 | ${filename} (${filetype})",
     "syntax": true,
-    "tabstospaces": true,
-    "wordwrap": true
+    "tabmovement": true,
+    "tabsize": 4,
+    "truecolor": true,
+    "wordwrap": true,
+    "savehistory": true
 }
