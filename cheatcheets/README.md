@@ -1,6 +1,6 @@
 # 📚 greenboot cheatsheets
 
-Terminalowe skróty i podpowiedzi do narzędzi używanych w FROGu.
+Terminalowe skróty i podpowiedzi do narzędzi.
 
 ---
 
