@@ -114,30 +114,30 @@ rc-service crond start
 echo "==> Generowanie klucza SSH dla $USERNAME..."
 sudo -u $USERNAME ssh-keygen -t ed25519 -C "$USERNAME@frog.devgru.local" -N "" -f $USER_HOME/.ssh/id_ed25519
 
-echo "==> Generowanie klucza GPG dla $USERNAME..."
-GPG_BATCH_FILE="/tmp/gpg_batch"
-cat <<EOF > $GPG_BATCH_FILE
-%no-protection
-Key-Type: default
-Key-Length: 2048
-Subkey-Type: default
-Name-Real: $USERNAME
-Name-Email: $USERNAME@frog.devgru.local
-Expire-Date: 0
-%commit
-EOF
+# echo "==> Generowanie klucza GPG dla $USERNAME..."
+# GPG_BATCH_FILE="/tmp/gpg_batch"
+# cat <<EOF > $GPG_BATCH_FILE
+# %no-protection
+# Key-Type: default
+# Key-Length: 2048
+# Subkey-Type: default
+# Name-Real: $USERNAME
+# Name-Email: $USERNAME@frog.devgru.local
+# Expire-Date: 0
+# %commit
+# EOF
 
-sudo -u $USERNAME gpg --batch --generate-key $GPG_BATCH_FILE
-rm $GPG_BATCH_FILE
+# sudo -u $USERNAME gpg --batch --generate-key $GPG_BATCH_FILE
+# rm $GPG_BATCH_FILE
 
-GPG_FPR=$(sudo -u $USERNAME gpg --list-keys --with-colons | grep '^fpr' | head -n 1 | cut -d: -f10)
-sudo -u $USERNAME gpg --armor --export $GPG_FPR > $USER_HOME/publickey.asc
+# GPG_FPR=$(sudo -u $USERNAME gpg --list-keys --with-colons | grep '^fpr' | head -n 1 | cut -d: -f10)
+# sudo -u $USERNAME gpg --armor --export $GPG_FPR > $USER_HOME/publickey.asc
 
-echo "==> Konfigurowanie Gopass..."
-sudo -u $USERNAME gopass init --storage=fs "$GPG_FPR"
-sudo -u $USERNAME gopass insert -m cloudflare/api <<< "CLOUDFLARE_API_KEY=your-api-key-here"
-sudo -u $USERNAME gopass insert -m mikrus1/ssh <<< "root@mikrus1\\npassword123"
-sudo -u $USERNAME gopass insert -m devgru/gpg/public <<< "$(cat $USER_HOME/publickey.asc)"
+# echo "==> Konfigurowanie Gopass..."
+# sudo -u $USERNAME gopass init --storage=fs "$GPG_FPR"
+# sudo -u $USERNAME gopass insert -m cloudflare/api <<< "CLOUDFLARE_API_KEY=your-api-key-here"
+# sudo -u $USERNAME gopass insert -m mikrus1/ssh <<< "root@mikrus1\\npassword123"
+# sudo -u $USERNAME gopass insert -m devgru/gpg/public <<< "$(cat $USER_HOME/publickey.asc)"
 
 echo "==> Ustawianie MOTD..."
 if [ -f /etc/motd ]; then
