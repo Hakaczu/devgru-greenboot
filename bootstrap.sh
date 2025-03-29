@@ -42,42 +42,13 @@ echo "==> Instalacja narzędzi CLI..."
 pip install --break-system-packages ansible
 
 echo "==> Instalacja OpenTofu..."
-# Instalacja zależności wymaganych przez OpenTofu
 apk add --no-cache curl unzip libc6-compat
+curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
+chmod +x install-opentofu.sh
+./install-opentofu.sh --install-method apk
+rm install-opentofu.sh
 
-# Pobieranie najnowszej wersji OpenTofu
-TF_VERSION=$(curl -s https://opentofu.org/releases/ | grep -Eo 'opentofu/[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 | cut -d/ -f2)
-
-# Sprawdzanie, czy TF_VERSION jest ustawione
-if [ -z "$TF_VERSION" ]; then
-    echo "\u274c Nie udało się pobrać wersji OpenTofu. Sprawdź stronę https://opentofu.org/releases/"
-    exit 1
-fi
-
-DOWNLOAD_URL="https://opentofu.org/releases/${TF_VERSION}/opentofu_${TF_VERSION}_linux_amd64.zip"
-
-# Sprawdzanie poprawności URL
-if ! curl -Is "$DOWNLOAD_URL" | head -n 1 | grep -q "200"; then
-    echo "\u274c Nie można pobrać OpenTofu. Sprawdź URL: $DOWNLOAD_URL"
-    exit 1
-fi
-
-curl -Ls "$DOWNLOAD_URL" -o /tmp/opentofu.zip
-
-# Sprawdzanie, czy plik ZIP został poprawnie pobrany
-if [ ! -s /tmp/opentofu.zip ]; then
-    echo "\u274c Pobieranie OpenTofu nie powiodło się. Plik ZIP jest pusty lub nie istnieje."
-    exit 1
-fi
-
-# Rozpakowanie i instalacja binarki OpenTofu
-unzip /tmp/opentofu.zip -d /usr/local/bin/ || {
-    echo "\u274c Rozpakowanie OpenTofu nie powiodło się. Sprawdź plik ZIP."
-    exit 1
-}
-chmod +x /usr/local/bin/opentofu
-
-# Weryfikacja instalacji
+echo 'export PATH=$PATH:/usr/local/bin/opentofu' >> $USER_HOME/.bashrc
 if ! command -v opentofu >/dev/null 2>&1; then
     echo "\u274c Instalacja OpenTofu nie powiodła się."
     exit 1
