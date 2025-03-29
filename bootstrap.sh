@@ -74,10 +74,17 @@ echo "==> Kopiowanie konfiguracji..."
 cp -r ./config/.bashrc $USER_HOME/
 cp -r ./config/.vimrc $USER_HOME/
 cp -r ./config/.tmux.conf $USER_HOME/
+
+mkdir -p $USER_HOME/.config/
+chown $USERNAME:$USERNAME $USER_HOME/bin/gb
+
 cp ./config/micro/settings.json $USER_HOME/.config/micro/
 cp ./config/nvim/init.vim $USER_HOME/.config/nvim/
 
 echo "==> Kopiowanie Greenboot CLI..."
+mkdir -p $USER_HOME/bin
+chown $USERNAME:$USERNAME $USER_HOME/bin
+
 cp ./bin/gb $USER_HOME/bin/gb
 chmod +x $USER_HOME/bin/gb
 chown $USERNAME:$USERNAME $USER_HOME/bin/gb
