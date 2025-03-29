@@ -7,7 +7,6 @@ colorscheme desert     " możesz zmienić na elflord, ron, torte itd.
 
 " 🔹 Widoczność i komfort
 set number             " numeracja linii
-set relativenumber     " względna numeracja
 set cursorline         " podświetlenie linii
 set showcmd            " pokazuj polecenia
 set showmode           " tryb INSERT/REPLACE itd.
