@@ -79,6 +79,19 @@ case "$1" in
             echo \"✅ Przywrócono dane z backupu.\"
         fi
         ;;
+    info)
+        echo "🧾 Informacje o środowisku FROGa"
+        echo "Hostname: $(hostname)"
+        echo "Data:     $(date)"
+        echo "Uptime:   $(uptime -p)"
+        echo "User:     $(whoami)"
+        echo "Shell:    $SHELL"
+        echo "Kernel:   $(uname -srmo)"
+        echo "IPv4:     $(hostname -I | awk '{print $1}')"
+        echo "IPv6:     $(ip -6 addr show | grep inet6 | awk '{print $2}' | head -n 1)"
+        echo "Tailscale: $(tailscale ip -4 2>/dev/null | head -n 1)"
+        echo "greenboot CLI: v$VERSION"
+        ;;
     help|*)
         echo "🐸 greenboot CLI – zarządzanie FROGiem"
         echo "Użycie:"
@@ -90,6 +103,7 @@ case "$1" in
         echo "  gb cheats           – pokaż dostępne ściągi"
         echo "  gb doctor           – sprawdź stan środowiska"
         echo "  gb restore          – przywróć ostatni backup"
+        echo "  gb info            – wyświetl informacje o systemie"
         echo "  gb help             – to co widzisz teraz"
         ;;
 esac
