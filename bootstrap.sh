@@ -34,26 +34,12 @@ chmod 600 $USER_HOME/.ssh/authorized_keys
 chown -R $USERNAME:$USERNAME $USER_HOME/.ssh
 
 echo "==> Aktualizacja i instalacja pakietów..."
-apk update && apk upgrade --force-broken-world
-apk add bash vim neovim micro tmux curl git openssh coreutils iptables sudo make gnupg gopass unzip py3-pip tailscale \
-        rsync rclone wget drill bind-tools htop mtr nmap nmap-ncat tcpdump socat iperf3 fzf jq yq cronie
+apk update && apk upgrade
+apk add bash vim neovim micro tmux curl git openssh coreutils iptables libc6-compat sudo make gnupg gopass unzip py3-pip tailscale \
+        rsync rclone wget drill bind-tools htop mtr nmap nmap-ncat tcpdump socat iperf3 fzf jq yq cronie tofu
 
 echo "==> Instalacja narzędzi CLI..."
 pip install --break-system-packages ansible
-
-echo "==> Instalacja OpenTofu..."
-apk add --no-cache curl unzip libc6-compat
-curl --proto '=https' --tlsv1.2 -fsSL https://get.opentofu.org/install-opentofu.sh -o install-opentofu.sh
-chmod +x install-opentofu.sh
-./install-opentofu.sh --install-method apk
-rm install-opentofu.sh
-
-if ! command -v tofu >/dev/null 2>&1; then
-    echo "\u274c Instalacja OpenTofu nie powiodła się."
-    exit 1
-else
-    echo "\u2705 OpenTofu zainstalowane pomyślnie."
-fi
 
 echo "==> Tworzenie struktury katalogów w $USER_HOME..."
 mkdir -p $USER_HOME/{bin,projects,config,logs,tmp,secrets,backups,cron,infra,cheatsheets}
