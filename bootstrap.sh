@@ -47,6 +47,13 @@ apk add --no-cache curl unzip libc6-compat
 
 # Pobieranie najnowszej wersji OpenTofu
 TF_VERSION=$(curl -s https://opentofu.org/releases/ | grep -Eo 'opentofu/[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 | cut -d/ -f2)
+
+# Sprawdzanie, czy TF_VERSION jest ustawione
+if [ -z "$TF_VERSION" ]; then
+    echo "\u274c Nie udało się pobrać wersji OpenTofu. Sprawdź stronę https://opentofu.org/releases/"
+    exit 1
+fi
+
 DOWNLOAD_URL="https://opentofu.org/releases/${TF_VERSION}/opentofu_${TF_VERSION}_linux_amd64.zip"
 
 # Sprawdzanie poprawności URL
