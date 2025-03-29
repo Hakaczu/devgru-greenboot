@@ -47,7 +47,7 @@ alias e='micro'
 alias v='nvim'
 
 # DevOps tools
-alias tf='terraform'
+alias tf='tofu'
 alias ans='ansible-playbook'
 alias pass='gopass'
 alias g='git'

@@ -41,7 +41,7 @@ chown -R $USERNAME:$USERNAME $USER_HOME/.ssh
 
 echo "==> Aktualizacja i instalacja pakietów..."
 apk update && apk upgrade
-apk add bash vim neovim micro tmux curl git openssh coreutils iptables libc6-compat sudo make gnupg gopass unzip py3-pip tailscale \
+apk add bash bat vim neovim micro tmux curl git openssh coreutils iptables libc6-compat sudo make gnupg gopass unzip py3-pip tailscale \
         rsync rclone wget drill bind-tools htop mtr nnn nmap nmap-ncat tcpdump socat iperf3 fzf jq yq cronie opentofu
 
 echo "==> Instalacja narzędzi CLI..."
