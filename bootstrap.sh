@@ -36,7 +36,7 @@ chown -R $USERNAME:$USERNAME $USER_HOME/.ssh
 echo "==> Aktualizacja i instalacja pakietów..."
 apk update && apk upgrade
 apk add bash vim neovim micro tmux curl git openssh coreutils iptables sudo make gnupg go unzip py3-pip tailscale \
-        rsync rclone wget drill bind-tools htop dstat mtr nmap nmap-ncat tcpdump socat iperf3 fzf jq yq cronie
+        rsync rclone wget drill bind-tools htop mtr nmap nmap-ncat tcpdump socat iperf3 fzf jq yq cronie
 
 echo "==> Instalacja narzędzi CLI..."
 pip install --break-system-packages ansible
