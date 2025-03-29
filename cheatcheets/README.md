@@ -77,12 +77,12 @@ tracepath devgru.com.pl
 ---
 
 ## 🌍 opentofu
-opentofu init  
-opentofu plan  
-opentofu apply  
-opentofu destroy  
-opentofu fmt  
-opentofu validate  
+tofu init  
+tofu plan  
+tofu apply  
+tofu destroy  
+tofu fmt  
+tofu validate  
 
 ---
 

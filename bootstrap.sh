@@ -48,8 +48,7 @@ chmod +x install-opentofu.sh
 ./install-opentofu.sh --install-method apk
 rm install-opentofu.sh
 
-echo 'export PATH=$PATH:/usr/local/bin/opentofu' >> $USER_HOME/.bashrc
-if ! command -v opentofu >/dev/null 2>&1; then
+if ! command -v tofu >/dev/null 2>&1; then
     echo "\u274c Instalacja OpenTofu nie powiodła się."
     exit 1
 else

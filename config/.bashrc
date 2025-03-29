@@ -24,7 +24,7 @@ alias l='ls -CF'
 alias cls='clear'
 
 # DevOps and CLI
-alias tf='opentofu'
+alias tf='tofu'
 alias ans='ansible-playbook'
 alias pass='gopass'
 alias g='git'
