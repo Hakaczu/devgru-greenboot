@@ -111,10 +111,6 @@ echo "==> Start usług Cron..."
 rc-update add crond
 rc-service crond start
 
-echo "==> Konfigurowanie Tailscale..."
-rc-update add tailscaled
-rc-service tailscaled start
-
 echo "==> Generowanie klucza SSH dla $USERNAME..."
 sudo -u $USERNAME ssh-keygen -t ed25519 -C "$USERNAME@frog.devgru.local" -N "" -f $USER_HOME/.ssh/id_ed25519
 
