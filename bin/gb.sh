@@ -27,12 +27,12 @@ case "$1" in
 
         if [ "$2" = "--override-config" ]; then
             echo "♻️  Nadpisuję pliki konfiguracyjne użytkownika..."
-            cp -r ./config/.bashrc ~/.bashrc
-            cp -r ./config/.vimrc ~/.vimrc
-            cp -r ./config/.tmux.conf ~/.tmux.conf
+            curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/.bashrc -o ~/.bashrc
+            curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/.vimrc -o ~/.vimrc
+            curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/.tmux.conf -o ~/.tmux.conf
             mkdir -p ~/.config/micro ~/.config/nvim
-            cp ./config/micro/settings.json ~/.config/micro/
-            cp ./config/nvim/init.vim ~/.config/nvim/
+            curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/micro/settings.json -o ~/.config/micro/settings.json
+            curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/nvim/init.vim -o ~/.config/nvim/init.vim
             echo "✅ Konfiguracja zaktualizowana."
         fi
         ;;
@@ -109,9 +109,8 @@ case "$1" in
         echo "User:     $(whoami)"
         echo "Shell:    $SHELL"
         echo "Kernel:   $(uname -srmo)"
-        echo "IPv4:     $(hostname -I | awk '{print $1}')"
+        echo "IPv4:     $(ip -4 addr show | grep inet | awk '{print $2}' | cut -d/ -f1 | head -n 1)"
         echo "IPv6:     $(ip -6 addr show | grep inet6 | awk '{print $2}' | grep -v '::1' | head -n 1)"
-        echo "Tailscale: $(tailscale ip -4 2>/dev/null | head -n 1)"
 
         LAST_LOGIN=$(last -n 1 $(whoami) | awk '{print $4, $5, $6, $7}')
         LAST_BACKUP=$(ls -t ~/backups/frog_backup_*.tar.gz 2>/dev/null | head -n 1 | xargs -I{} date -r {} "+%Y-%m-%d %H:%M")
