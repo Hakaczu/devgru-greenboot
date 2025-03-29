@@ -1,8 +1,8 @@
 # 🐸 greenboot
 
-**greenboot** to bootstrapper systemu FROG – lekkiego i zautomatyzowanego terminalowego noda operacyjnego.
+**greenboot** to bootstrapper systemu Alpine Linux.
 
-Zaprojektowany z myślą o szybkości, czystości i pełnej gotowości DevOpsowej, greenboot instaluje wszystkie niezbędne narzędzia, konfiguruje środowisko i uruchamia agenta CLI `gb`.
+Zaprojektowany z myślą o szybkości i pełnej gotowości DevOpsowej, greenboot instaluje wszystkie niezbędne narzędzia, konfiguruje środowisko i uruchamia agenta CLI `gb`.
 
 ---
 
