@@ -1,5 +1,5 @@
 #!/bin/sh
-VERSION="1.0.1"
+VERSION="1.0.2"
 
 # greenboot CLI – alias: gb
 # Ułatwia zarządzanie FROGiem z terminala
