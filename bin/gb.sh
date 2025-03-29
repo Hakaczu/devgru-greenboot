@@ -92,6 +92,31 @@ case "$1" in
         echo "Tailscale: $(tailscale ip -4 2>/dev/null | head -n 1)"
         echo "greenboot CLI: v$VERSION"
         ;;
+    ports)
+        echo "🌐 Dostępne zewnętrzne porty FROGa:"
+        HOSTNAME=$(hostname)
+        SUFFIX=$(echo "$HOSTNAME" | grep -o '[0-9]*$')
+
+        echo "Domena: $HOSTNAME"
+        echo "Identyfikator: $SUFFIX"
+        echo
+        echo "➡️  Porty dostępne (TCP/UDP):"
+        echo " - $HOSTNAME:20678 → 192.168.6.178:20678 (slot 2)"
+        echo " - $HOSTNAME:30678 → 192.168.6.178:30678 (slot 3)"
+        echo " - $HOSTNAME:40678 → 192.168.6.178:40678 (slot 4)"
+        echo
+        echo "🧪 Status nasłuchu lokalnie:"
+        for PORT in 20678 30678 40678; do
+            if ss -tuln | grep -q ":$PORT"; then
+                echo "✅ Port $PORT aktywny (nasłuchuje)"
+            else
+                echo "❌ Port $PORT nieaktywny"
+            fi
+        done
+        echo
+        echo "🧬 Adres IPv6:"
+        ip -6 addr show | grep inet6 | awk '{print $2}' | grep -v '::1' | head -n 1
+        ;;
     help|*)
         echo "🐸 greenboot CLI – zarządzanie FROGiem"
         echo "Użycie:"
