@@ -103,7 +103,7 @@ cp ./config/micro/settings.json $USER_HOME/.config/micro/
 cp ./config/nvim/init.vim $USER_HOME/.config/nvim/
 
 echo "==> Kopiowanie Greenboot CLI..."
-cp ./bin/gb $USER_HOME/bin/gb
+cp ./bin/gb.sh $USER_HOME/bin/gb
 chmod +x $USER_HOME/bin/gb
 chown $USERNAME:$USERNAME $USER_HOME/bin/gb
 
