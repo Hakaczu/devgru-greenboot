@@ -1,0 +1,15 @@
+{
+    "autosave": true,
+    "colorscheme": "solarized-dark",
+    "fileformat": "unix",
+    "ignorecase": true,
+    "indentchar": " ",
+    "tabsize": 4,
+    "ruler": true,
+    "savecursor": true,
+    "scrollmargin": 2,
+    "statusline": true,
+    "syntax": true,
+    "tabstospaces": true,
+    "wordwrap": true
+}
