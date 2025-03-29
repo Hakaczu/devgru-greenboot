@@ -86,15 +86,6 @@ cp ./bin/gb $USER_HOME/bin/gb
 chmod +x $USER_HOME/bin/gb
 chown $USERNAME:$USERNAME $USER_HOME/bin/gb
 
-# MOTD
-echo "neofetch" >> $USER_HOME/.bashrc
-cat <<EOF > /etc/motd
-🐸 Alpine Node DEVGRU
-Hostname: $(hostname)
-Data: $(date)
-Uptime: $(uptime -p)
-EOF
-
 # Cron
 rc-update add crond
 rc-service crond start
@@ -136,3 +127,17 @@ sudo -u $USERNAME gopass init --storage=fs "$GPG_FPR"
 sudo -u $USERNAME gopass insert -m cloudflare/api <<< "CLOUDFLARE_API_KEY=your-api-key-here"
 sudo -u $USERNAME gopass insert -m mikrus1/ssh <<< "root@mikrus1\\npassword123"
 sudo -u $USERNAME gopass insert -m devgru/gpg/public <<< "$(cat $USER_HOME/publickey.asc)"
+
+# Ustawienia MOTD
+if [ -f /etc/motd ]; then
+    mv /etc/motd /etc/motd.bak
+fi
+if [ -f /etc/motd.tail ]; then
+    mv /etc/motd.tail /etc/motd.tail.bak
+fi
+cat <<EOF > /etc/motd
+🐸 Alpine Node DEVGRU
+Hostname: $(hostname)
+Data: $(date)
+Uptime: $(uptime -p)
+EOF

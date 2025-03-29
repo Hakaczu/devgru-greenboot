@@ -93,8 +93,15 @@ case "$1" in
         echo "Shell:    $SHELL"
         echo "Kernel:   $(uname -srmo)"
         echo "IPv4:     $(hostname -I | awk '{print $1}')"
-        echo "IPv6:     $(ip -6 addr show | grep inet6 | awk '{print $2}' | head -n 1)"
+        echo "IPv6:     $(ip -6 addr show | grep inet6 | awk '{print $2}' | grep -v '::1' | head -n 1)"
         echo "Tailscale: $(tailscale ip -4 2>/dev/null | head -n 1)"
+
+        LAST_LOGIN=$(last -n 1 $(whoami) | awk '{print $4, $5, $6, $7}')
+        LAST_BACKUP=$(ls -t ~/backups/frog_backup_*.tar.gz 2>/dev/null | head -n 1 | xargs -I{} date -r {} "+%Y-%m-%d %H:%M")
+
+        echo "Last login: ${LAST_LOGIN:-Brak danych}"
+        echo "Last backup: ${LAST_BACKUP:-Brak backupu}"
+
         echo "greenboot CLI: v$VERSION"
         ;;
     ports)
