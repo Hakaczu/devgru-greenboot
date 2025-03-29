@@ -47,10 +47,27 @@ apk add --no-cache curl unzip libc6-compat
 
 # Pobieranie najnowszej wersji OpenTofu
 TF_VERSION=$(curl -s https://opentofu.org/releases/ | grep -Eo 'opentofu/[0-9]+\.[0-9]+\.[0-9]+' | head -n 1 | cut -d/ -f2)
-curl -Ls "https://opentofu.org/releases/${TF_VERSION}/opentofu_${TF_VERSION}_linux_amd64.zip" -o /tmp/opentofu.zip
+DOWNLOAD_URL="https://opentofu.org/releases/${TF_VERSION}/opentofu_${TF_VERSION}_linux_amd64.zip"
+
+# Sprawdzanie poprawności URL
+if ! curl -Is "$DOWNLOAD_URL" | head -n 1 | grep -q "200"; then
+    echo "\u274c Nie można pobrać OpenTofu. Sprawdź URL: $DOWNLOAD_URL"
+    exit 1
+fi
+
+curl -Ls "$DOWNLOAD_URL" -o /tmp/opentofu.zip
+
+# Sprawdzanie, czy plik ZIP został poprawnie pobrany
+if [ ! -s /tmp/opentofu.zip ]; then
+    echo "\u274c Pobieranie OpenTofu nie powiodło się. Plik ZIP jest pusty lub nie istnieje."
+    exit 1
+fi
 
 # Rozpakowanie i instalacja binarki OpenTofu
-unzip /tmp/opentofu.zip -d /usr/local/bin/
+unzip /tmp/opentofu.zip -d /usr/local/bin/ || {
+    echo "\u274c Rozpakowanie OpenTofu nie powiodło się. Sprawdź plik ZIP."
+    exit 1
+}
 chmod +x /usr/local/bin/opentofu
 
 # Weryfikacja instalacji
