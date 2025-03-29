@@ -34,7 +34,7 @@ chmod 600 $USER_HOME/.ssh/authorized_keys
 chown -R $USERNAME:$USERNAME $USER_HOME/.ssh
 
 echo "==> Aktualizacja i instalacja pakietów..."
-apk update && apk upgrade
+apk update && apk upgrade --force-broken-world
 apk add bash vim neovim micro tmux curl git openssh coreutils iptables sudo make gnupg gopass unzip py3-pip tailscale \
         rsync rclone wget drill bind-tools htop mtr nmap nmap-ncat tcpdump socat iperf3 fzf jq yq cronie
 
