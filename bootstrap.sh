@@ -18,8 +18,12 @@ USERNAME="$1"
 USER_HOME="/home/$USERNAME"
 
 # Dodanie użytkownika z roota
-adduser -D "$USERNAME"
-echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+if id "$USERNAME" >/dev/null 2>&1; then
+    echo "Użytkownik $USERNAME już istnieje, pomijanie dodawania."
+else
+    adduser -D "$USERNAME"
+    echo "$USERNAME ALL=(ALL) NOPASSWD: ALL" >> /etc/sudoers
+fi
 
 # SSH
 mkdir -p $USER_HOME/.ssh
@@ -31,7 +35,7 @@ chown -R $USERNAME:$USERNAME $USER_HOME/.ssh
 # Pakiety
 apk update && apk upgrade
 apk add bash vim neovim micro tmux curl git openssh coreutils iptables sudo make gnupg go unzip py3-pip tailscale \
-        rsync rclone wget drill bind-tools htop dstat mtr nmap nmap-ncat tcpdump socat iperf3 fzf jq yq neofetch cronie
+        rsync rclone wget drill bind-tools htop dstat mtr nmap nmap-ncat tcpdump socat iperf3 fzf jq yq cronie
 
 # CLI tools
 pip install --break-system-packages ansible
