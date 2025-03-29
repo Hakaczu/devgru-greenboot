@@ -30,7 +30,6 @@ case "$1" in
             curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/.bashrc -o ~/.bashrc
             curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/.vimrc -o ~/.vimrc
             curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/.tmux.conf -o ~/.tmux.conf
-            mkdir -p ~/.config/micro ~/.config/nvim
             curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/micro/settings.json -o ~/.config/micro/settings.json
             curl -sSL https://raw.githubusercontent.com/hakaczu/devgru-greenboot/main/config/nvim/init.vim -o ~/.config/nvim/init.vim
             echo "✅ Konfiguracja zaktualizowana."
