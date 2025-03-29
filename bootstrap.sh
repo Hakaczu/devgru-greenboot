@@ -42,9 +42,34 @@ echo "==> Instalacja narzędzi CLI..."
 pip install --break-system-packages ansible
 
 echo "==> Tworzenie struktury katalogów w $USER_HOME..."
-mkdir -p $USER_HOME/{bin,projects,config,logs,tmp,secrets,backups,cron,infra,cheatsheets}
-mkdir -p $USER_HOME/.config/{micro,nvim,nnn,rclone}
+mkdir -p $USER_HOME/bin
+mkdir -p $USER_HOME/projects
+mkdir -p $USER_HOME/config
+mkdir -p $USER_HOME/logs
+mkdir -p $USER_HOME/tmp
+mkdir -p $USER_HOME/secrets
+mkdir -p $USER_HOME/backups
+mkdir -p $USER_HOME/cron
+mkdir -p $USER_HOME/infra
+mkdir -p $USER_HOME/cheatsheets
+mkdir -p $USER_HOME/.config/micro
+mkdir -p $USER_HOME/.config/nvim
+mkdir -p $USER_HOME/.config/nnn
+mkdir -p $USER_HOME/.config/rclone
 mkdir -p $USER_HOME/.local/bin
+
+chown -R $USERNAME:$USERNAME $USER_HOME/bin
+chown -R $USERNAME:$USERNAME $USER_HOME/projects
+chown -R $USERNAME:$USERNAME $USER_HOME/config
+chown -R $USERNAME:$USERNAME $USER_HOME/logs
+chown -R $USERNAME:$USERNAME $USER_HOME/tmp
+chown -R $USERNAME:$USERNAME $USER_HOME/secrets
+chown -R $USERNAME:$USERNAME $USER_HOME/backups
+chown -R $USERNAME:$USERNAME $USER_HOME/cron
+chown -R $USERNAME:$USERNAME $USER_HOME/infra
+chown -R $USERNAME:$USERNAME $USER_HOME/cheatsheets
+chown -R $USERNAME:$USERNAME $USER_HOME/.config
+chown -R $USERNAME:$USERNAME $USER_HOME/.local/bin
 
 echo "==> Tworzenie pliku README_DEVGRU.txt..."
 cat <<EOF > $USER_HOME/README_DEVGRU.txt
@@ -74,17 +99,10 @@ echo "==> Kopiowanie konfiguracji..."
 cp -r ./config/.bashrc $USER_HOME/
 cp -r ./config/.vimrc $USER_HOME/
 cp -r ./config/.tmux.conf $USER_HOME/
-
-mkdir -p $USER_HOME/.config/
-chown $USERNAME:$USERNAME $USER_HOME/bin/gb
-
 cp ./config/micro/settings.json $USER_HOME/.config/micro/
 cp ./config/nvim/init.vim $USER_HOME/.config/nvim/
 
 echo "==> Kopiowanie Greenboot CLI..."
-mkdir -p $USER_HOME/bin
-chown $USERNAME:$USERNAME $USER_HOME/bin
-
 cp ./bin/gb $USER_HOME/bin/gb
 chmod +x $USER_HOME/bin/gb
 chown $USERNAME:$USERNAME $USER_HOME/bin/gb
